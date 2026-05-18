@@ -48,6 +48,9 @@ void show_confirmation_dialog_ex(
     }
 
     confirm_ctx->state = state;
+    if(state->active_confirm_context) {
+        free(state->active_confirm_context);
+    }
     state->active_confirm_context = confirm_ctx;
 
     // Set up the confirmation dialog

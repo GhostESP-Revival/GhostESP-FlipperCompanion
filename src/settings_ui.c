@@ -49,6 +49,11 @@ void clear_log_files(void* context) {
     // Open storage once
     Storage* storage = furi_record_open(RECORD_STORAGE);
     File* dir = storage_file_alloc(storage);
+    if(!dir) {
+        furi_record_close(RECORD_STORAGE);
+        create_new_log(app);
+        return;
+    }
 
     if(!storage_dir_open(dir, GHOST_ESP_APP_FOLDER_LOGS)) {
         FURI_LOG_E("ClearLogs", "Failed to open logs directory");
@@ -87,7 +92,11 @@ void clear_pcap_files(void* context) {
     // Close current file if open
     if(app->uart_context && app->uart_context->storageContext &&
        app->uart_context->storageContext->current_file) {
-        storage_file_close(app->uart_context->storageContext->current_file);
+        if(storage_file_is_open(app->uart_context->storageContext->current_file)) {
+            storage_file_sync(app->uart_context->storageContext->current_file);
+            storage_file_close(app->uart_context->storageContext->current_file);
+        }
+        app->uart_context->storageContext->HasOpenedFile = false;
     }
 
     // Stack allocation for better performance
@@ -99,6 +108,10 @@ void clear_pcap_files(void* context) {
     // Open storage once
     Storage* storage = furi_record_open(RECORD_STORAGE);
     File* dir = storage_file_alloc(storage);
+    if(!dir) {
+        furi_record_close(RECORD_STORAGE);
+        return;
+    }
 
     if(!storage_dir_open(dir, GHOST_ESP_APP_FOLDER_PCAPS)) {
         FURI_LOG_E("ClearPCAPs", "Failed to open pcaps directory");
@@ -137,6 +150,10 @@ void clear_wardrive_files(void* context) {
     // Open storage once
     Storage* storage = furi_record_open(RECORD_STORAGE);
     File* dir = storage_file_alloc(storage);
+    if(!dir) {
+        furi_record_close(RECORD_STORAGE);
+        return;
+    }
 
     if(!storage_dir_open(dir, GHOST_ESP_APP_FOLDER_WARDRIVE)) {
         FURI_LOG_E("ClearWardrive", "Failed to open wardrive directory");
@@ -581,13 +598,12 @@ bool settings_custom_event_callback(void* context, uint32_t event_id) {
 
         view_dispatcher_switch_to_view(app_state->view_dispatcher, 7);
         app_state->current_view = 7;
-        break;
+        return true;
     }
 
     default:
         return false;
     }
-    return false;
 }
 
 // 6675636B796F7564656B69

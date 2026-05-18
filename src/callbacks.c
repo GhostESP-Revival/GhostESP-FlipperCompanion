@@ -199,12 +199,18 @@ void nvs_clear_cancelled_callback(void* context) {
     }
 }
 void show_app_info(void* context) {
+    if(!context) return;
     SettingsUIContext* settings_context = (SettingsUIContext*)context;
     AppState* app = (AppState*)settings_context->context;
 
     FURI_LOG_D("AppInfo", "Show app info called, context: %p", app);
 
-    const char* info_text = "";
+    const char* info_text = "Created by: Spooky\n"
+                            "Updated by:\n"
+                            "@jaylikesbunda\n"
+                            "@tototo31\n"
+                            "Built with <3\n"
+                            "github.com/jaylikesbunda/ghost_esp\n\n";
 
     if(app && app->confirmation_view) {
         // Create a new context for the confirmation dialog
@@ -214,6 +220,7 @@ void show_app_info(void* context) {
             return;
         }
         confirm_ctx->state = app;
+        app->active_confirm_context = confirm_ctx;
 
         // Save current view before switching
         app->previous_view = app->current_view;

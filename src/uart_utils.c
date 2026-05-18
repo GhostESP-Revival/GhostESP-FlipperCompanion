@@ -367,6 +367,10 @@ void handle_uart_rx_data(uint8_t* buf, size_t len, void* context) {
        state->uart_context->storageContext->HasOpenedFile) {
         static size_t bytes_since_sync = 0;
 
+        if(bytes_since_sync > 1024 && state->uart_context->storageContext->HasOpenedFile) {
+            bytes_since_sync = 0;
+        }
+
         size_t written =
             storage_file_write(state->uart_context->storageContext->log_file, buf, len);
 

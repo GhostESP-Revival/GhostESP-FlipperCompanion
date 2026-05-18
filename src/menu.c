@@ -1714,13 +1714,24 @@ static bool ir_query_and_parse_universals(AppState* state) {
 
     uart_reset_text_buffers(state->uart_context);
     send_uart_command("ir universals list\n", state);
-    furi_delay_ms(200);
 
     char buffer[IR_UART_PARSE_BUF_SIZE];
 
     size_t len = 0;
-    if(!uart_copy_text_buffer_tail(state->uart_context, buffer, IR_UART_PARSE_BUF_SIZE, &len) ||
-       len == 0) {
+    uint32_t start = furi_get_tick();
+    const uint32_t timeout_ms = 3000;
+    while(furi_get_tick() - start < timeout_ms) {
+        furi_delay_ms(100);
+        if(uart_copy_text_buffer_tail(state->uart_context, buffer, IR_UART_PARSE_BUF_SIZE, &len) &&
+           len > 0) {
+            if(strstr(buffer, "Universal Files in ") || strstr(buffer, "Built-in") ||
+               strstr(buffer, "(none)") || strchr(buffer, '.')) {
+                break;
+            }
+        }
+    }
+
+    if(len == 0) {
         return false;
     }
 
@@ -2026,19 +2037,64 @@ static void confirmation_ok_callback(void* context) {
 static void confirmation_cancel_callback(void* context) {
     MenuCommandContext* cmd_ctx = context;
     if(cmd_ctx && cmd_ctx->state) {
-        cmd_ctx->state->active_confirm_context = NULL;
-        switch(cmd_ctx->state->previous_view) {
+        AppState* s = cmd_ctx->state;
+        s->active_confirm_context = NULL;
+        uint32_t pv = s->previous_view;
+        switch(pv) {
         case 1:
-            show_wifi_menu(cmd_ctx->state);
+            show_wifi_menu(s);
+            submenu_set_selected_item(s->wifi_menu, s->last_wifi_category_index);
+            break;
+        case 10:
+            show_wifi_scanning_menu(s);
+            submenu_set_selected_item(s->wifi_scanning_menu, s->last_wifi_scanning_index);
+            break;
+        case 11:
+            show_wifi_capture_menu(s);
+            submenu_set_selected_item(s->wifi_capture_menu, s->last_wifi_capture_index);
+            break;
+        case 12:
+            show_wifi_attack_menu(s);
+            submenu_set_selected_item(s->wifi_attack_menu, s->last_wifi_attack_index);
+            break;
+        case 13:
+            show_wifi_network_menu(s);
+            submenu_set_selected_item(s->wifi_network_menu, s->last_wifi_network_index);
+            break;
+        case 14:
+            show_wifi_settings_menu(s);
+            submenu_set_selected_item(s->wifi_settings_menu, s->last_wifi_settings_index);
             break;
         case 2:
-            show_ble_menu(cmd_ctx->state);
+            show_ble_menu(s);
+            submenu_set_selected_item(s->ble_menu, s->last_ble_category_index);
+            break;
+        case 20:
+            show_ble_scanning_menu(s);
+            submenu_set_selected_item(s->ble_scanning_menu, s->last_ble_scanning_index);
+            break;
+        case 21:
+            show_ble_capture_menu(s);
+            submenu_set_selected_item(s->ble_capture_menu, s->last_ble_capture_index);
+            break;
+        case 22:
+            show_ble_attack_menu(s);
+            submenu_set_selected_item(s->ble_attack_menu, s->last_ble_attack_index);
             break;
         case 3:
-            show_gps_menu(cmd_ctx->state);
+            show_gps_menu(s);
+            submenu_set_selected_item(s->gps_menu, s->last_gps_index);
+            break;
+        case 15:
+            show_aerial_menu(s);
+            submenu_set_selected_item(s->aerial_menu, s->last_aerial_category_index);
+            break;
+        case 30:
+            show_ir_menu(s);
+            submenu_set_selected_item(s->ir_menu, s->last_ir_index);
             break;
         default:
-            show_main_menu(cmd_ctx->state);
+            show_main_menu(s);
             break;
         }
     }

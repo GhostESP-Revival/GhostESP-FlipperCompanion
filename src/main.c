@@ -26,7 +26,6 @@
 #include "app_state.h"
 
 // Include the header where settings_custom_event_callback is declared
-#include "settings_ui.h"
 
 #define UART_INIT_STACK_SIZE 2048
 #define UART_INIT_TIMEOUT_MS 1500 // ms
@@ -89,12 +88,17 @@ int32_t ghost_esp_app(void* p) {
     state->view_dispatcher = view_dispatcher_alloc();
     state->main_menu = main_menu_alloc();
     if(!state->view_dispatcher || !state->main_menu) {
-        // Clean up and exit if core components fail
         if(state->view_dispatcher) view_dispatcher_free(state->view_dispatcher);
         if(state->main_menu) main_menu_free(state->main_menu);
+        if(state->dialogs) furi_record_close(RECORD_DIALOGS);
         free(state->textBoxBuffer);
         free(state->input_buffer);
         free(state);
+        expansion_enable(expansion);
+        furi_record_close(RECORD_EXPANSION);
+        if(furi_hal_power_is_otg_enabled() && !otg_was_enabled) {
+            furi_hal_power_disable_otg();
+        }
         return -1;
     }
 
@@ -247,7 +251,7 @@ int32_t ghost_esp_app(void* p) {
 
     if(!state->text_box) {
         FURI_LOG_E("Main", "Text box allocation failed!");
-        return -1; // Don't try to fuck with broken UI
+        goto cleanup;
     }
 
     text_view_attach_input_handler(state);
@@ -268,6 +272,7 @@ int32_t ghost_esp_app(void* p) {
         view_dispatcher_run(state->view_dispatcher);
     }
 
+cleanup:
     // ---- Start Cleanup Sequence ----
     FURI_LOG_I("Ghost_ESP", "Starting cleanup sequence...");
 
@@ -291,7 +296,6 @@ int32_t ghost_esp_app(void* p) {
     // Clean up UART context (this will also handle storage cleanup)
     if(state && state->uart_context) {
         FURI_LOG_I("Ghost_ESP", "Freeing UART context...");
-        uart_cleanup_capture_streams(state->uart_context); // Ensure capture streams are freed
         uart_free(state->uart_context);
         state->uart_context = NULL;
         FURI_LOG_I("Ghost_ESP", "UART context freed.");
