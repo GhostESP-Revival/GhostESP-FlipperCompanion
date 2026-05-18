@@ -22,6 +22,7 @@
 - Fixed error path in core UI allocation leaking `RECORD_DIALOGS`, expansion protocol and OTG power state
 - Replaced all magic number view IDs with named ViewId enum constants across the entire codebase for readability and maintainability
 - Added navigate_to_view helper to centralize view switching logic, reducing back event callback from ~240 lines to ~55 lines
+- Added Flock Detection, Flock List, and Stop Flock Detection commands to WiFi Scanning menu
 
 ## v1.6.3
 

@@ -303,6 +303,33 @@ static const MenuCommand wifi_scanning_commands[] = {
         .details_text = "Stops Pineapple detection mode.",
     },
     {
+        .label = "Flock Detection",
+        .command = "flockscan\n",
+        .details_header = "Flock Detection",
+        .details_text = "Detect Flock Safety cameras,\n"
+                        "extended battery units, and\n"
+                        "Penguin surveillance devices\n"
+                        "on 2.4 GHz Wi-Fi.\n"
+                        "Uses OUI matching, wildcard\n"
+                        "probe detection, and SSID\n"
+                        "keyword matching.\n",
+    },
+    {
+        .label = "Flock List",
+        .command = "flocklist\n",
+        .details_header = "Flock List",
+        .details_text = "List detected Flock Safety\n"
+                        "surveillance devices.\n"
+                        "Run after Flock Detection.\n",
+    },
+    {
+        .label = "Stop Flock Detection",
+        .command = "flockstop\n",
+        .details_header = "Stop Flock Detection",
+        .details_text = "Stops Flock Safety camera\n"
+                        "detection scanning.\n",
+    },
+    {
         .label = "Channel Congestion",
         .command = "congestion\n",
         .details_header = "Channel Congestion",
