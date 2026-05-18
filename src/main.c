@@ -256,20 +256,18 @@ int32_t ghost_esp_app(void* p) {
                 submenu_get_view(state->ble_capture_menu));
         if(state->ble_attack_menu)
             view_dispatcher_add_view(
-                state->view_dispatcher,
-                VIEW_BLE_ATTACK,
-                submenu_get_view(state->ble_attack_menu));
+                state->view_dispatcher, VIEW_BLE_ATTACK, submenu_get_view(state->ble_attack_menu));
         if(state->ir_menu)
             view_dispatcher_add_view(
                 state->view_dispatcher, VIEW_IR, submenu_get_view(state->ir_menu));
         if(state->ir_remotes_menu)
             view_dispatcher_add_view(
-                state->view_dispatcher, VIEW_IR_REMOTES, submenu_get_view(state->ir_remotes_menu));
+                state->view_dispatcher,
+                VIEW_IR_REMOTES,
+                submenu_get_view(state->ir_remotes_menu));
         if(state->ir_buttons_menu)
             view_dispatcher_add_view(
-                state->view_dispatcher,
-                VIEW_IR_BUTTONS,
-                submenu_get_view(state->ir_buttons_menu));
+                state->view_dispatcher, VIEW_IR_BUTTONS, submenu_get_view(state->ir_buttons_menu));
         if(state->ir_universals_menu)
             view_dispatcher_add_view(
                 state->view_dispatcher,
@@ -339,7 +337,8 @@ cleanup:
         if(state->wifi_menu) view_dispatcher_remove_view(state->view_dispatcher, VIEW_WIFI);
         if(state->ble_menu) view_dispatcher_remove_view(state->view_dispatcher, VIEW_BLE);
         if(state->gps_menu) view_dispatcher_remove_view(state->view_dispatcher, VIEW_GPS);
-        if(state->settings_menu) view_dispatcher_remove_view(state->view_dispatcher, VIEW_SETTINGS);
+        if(state->settings_menu)
+            view_dispatcher_remove_view(state->view_dispatcher, VIEW_SETTINGS);
         if(state->text_box) view_dispatcher_remove_view(state->view_dispatcher, VIEW_TEXT_BOX);
         if(state->text_input) view_dispatcher_remove_view(state->view_dispatcher, VIEW_TEXT_INPUT);
         if(state->confirmation_view)

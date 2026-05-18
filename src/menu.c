@@ -3726,7 +3726,8 @@ static bool menu_input_handler(InputEvent* event, void* context) {
                 } else {
                     state->current_index = current_index;
                     // Save last selection for proper restore on exit
-                    if(state->current_view >= VIEW_WIFI_SCANNING && state->current_view <= VIEW_WIFI_SETTINGS) {
+                    if(state->current_view >= VIEW_WIFI_SCANNING &&
+                       state->current_view <= VIEW_WIFI_SETTINGS) {
                         switch(state->current_view) {
                         case VIEW_WIFI_SCANNING:
                             state->last_wifi_scanning_index = current_index;
@@ -3744,7 +3745,9 @@ static bool menu_input_handler(InputEvent* event, void* context) {
                             state->last_wifi_settings_index = current_index;
                             break;
                         }
-                    } else if(state->current_view >= VIEW_BLE_SCANNING && state->current_view <= VIEW_BLE_ATTACK) {
+                    } else if(
+                        state->current_view >= VIEW_BLE_SCANNING &&
+                        state->current_view <= VIEW_BLE_ATTACK) {
                         switch(state->current_view) {
                         case VIEW_BLE_SCANNING:
                             state->last_ble_scanning_index = current_index;
@@ -3770,16 +3773,18 @@ static bool menu_input_handler(InputEvent* event, void* context) {
         case InputKeyBack:
             if(state->current_view == VIEW_STATUS_IDLE) {
                 navigate_to_view(state, VIEW_SETTINGS_ACTIONS);
-            } else if(state->current_view >= VIEW_WIFI_SCANNING &&
-                      state->current_view <= VIEW_AERIAL) {
+            } else if(
+                state->current_view >= VIEW_WIFI_SCANNING &&
+                state->current_view <= VIEW_AERIAL) {
                 if(state->came_from_settings &&
                    state->current_view <= VIEW_WIFI_SETTINGS) {
                     navigate_to_view(state, VIEW_SETTINGS_ACTIONS);
                 } else {
                     navigate_to_view(state, VIEW_WIFI);
                 }
-            } else if(state->current_view >= VIEW_BLE_SCANNING &&
-                      state->current_view <= VIEW_BLE_ATTACK) {
+            } else if(
+                state->current_view >= VIEW_BLE_SCANNING &&
+                state->current_view <= VIEW_BLE_ATTACK) {
                 navigate_to_view(state, VIEW_BLE);
             } else if(
                 (state->current_view >= VIEW_WIFI && state->current_view <= VIEW_GPS) ||
