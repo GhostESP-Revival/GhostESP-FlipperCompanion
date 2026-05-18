@@ -262,9 +262,7 @@ int32_t ghost_esp_app(void* p) {
                 state->view_dispatcher, VIEW_IR, submenu_get_view(state->ir_menu));
         if(state->ir_remotes_menu)
             view_dispatcher_add_view(
-                state->view_dispatcher,
-                VIEW_IR_REMOTES,
-                submenu_get_view(state->ir_remotes_menu));
+                state->view_dispatcher, VIEW_IR_REMOTES, submenu_get_view(state->ir_remotes_menu));
         if(state->ir_buttons_menu)
             view_dispatcher_add_view(
                 state->view_dispatcher, VIEW_IR_BUTTONS, submenu_get_view(state->ir_buttons_menu));

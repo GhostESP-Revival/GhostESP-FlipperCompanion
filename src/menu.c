@@ -3773,11 +3773,8 @@ static bool menu_input_handler(InputEvent* event, void* context) {
         case InputKeyBack:
             if(state->current_view == VIEW_STATUS_IDLE) {
                 navigate_to_view(state, VIEW_SETTINGS_ACTIONS);
-            } else if(
-                state->current_view >= VIEW_WIFI_SCANNING &&
-                state->current_view <= VIEW_AERIAL) {
-                if(state->came_from_settings &&
-                   state->current_view <= VIEW_WIFI_SETTINGS) {
+            } else if(state->current_view >= VIEW_WIFI_SCANNING && state->current_view <= VIEW_AERIAL) {
+                if(state->came_from_settings && state->current_view <= VIEW_WIFI_SETTINGS) {
                     navigate_to_view(state, VIEW_SETTINGS_ACTIONS);
                 } else {
                     navigate_to_view(state, VIEW_WIFI);
