@@ -3591,7 +3591,8 @@ void show_ble_scanning_menu(AppState* state) {
     submenu_add_item(state->ble_scanning_menu, "Flipper & Skimmer >", 0, submenu_callback, state);
     submenu_add_item(state->ble_scanning_menu, "AirTag >", 1, submenu_callback, state);
     submenu_add_item(state->ble_scanning_menu, "GATT >", 2, submenu_callback, state);
-    submenu_add_item(state->ble_scanning_menu, "Advertisers & Traffic >", 3, submenu_callback, state);
+    submenu_add_item(
+        state->ble_scanning_menu, "Advertisers & Traffic >", 3, submenu_callback, state);
     submenu_set_selected_item(state->ble_scanning_menu, state->last_ble_scanning_index);
     view_dispatcher_switch_to_view(state->view_dispatcher, VIEW_BLE_SCANNING);
     state->current_view = VIEW_BLE_SCANNING;
@@ -4590,21 +4591,29 @@ static bool menu_input_handler(InputEvent* event, void* context) {
                 } else {
                     navigate_to_view(state, VIEW_WIFI);
                 }
-            } else if(state->current_view >= VIEW_WIFI_SETTINGS_LED && state->current_view <= VIEW_WIFI_SETTINGS_MISC) {
+            } else if(
+                state->current_view >= VIEW_WIFI_SETTINGS_LED &&
+                state->current_view <= VIEW_WIFI_SETTINGS_MISC) {
                 if(state->came_from_settings) {
                     navigate_to_view(state, VIEW_SETTINGS_ACTIONS);
                 } else {
                     navigate_to_view(state, VIEW_WIFI_SETTINGS);
                 }
-            } else if(state->current_view >= VIEW_WIFI_NETWORK_PORTAL && state->current_view <= VIEW_WIFI_NETWORK_WEBUI) {
+            } else if(
+                state->current_view >= VIEW_WIFI_NETWORK_PORTAL &&
+                state->current_view <= VIEW_WIFI_NETWORK_WEBUI) {
                 navigate_to_view(state, VIEW_WIFI_NETWORK);
             } else if(
                 state->current_view >= VIEW_BLE_SCANNING &&
                 state->current_view <= VIEW_BLE_ATTACK) {
                 navigate_to_view(state, VIEW_BLE);
-            } else if(state->current_view >= VIEW_BLE_SCAN_DETECT && state->current_view <= VIEW_BLE_SCAN_ADV) {
+            } else if(
+                state->current_view >= VIEW_BLE_SCAN_DETECT &&
+                state->current_view <= VIEW_BLE_SCAN_ADV) {
                 navigate_to_view(state, VIEW_BLE_SCANNING);
-            } else if(state->current_view >= VIEW_GPS_CONFIG && state->current_view <= VIEW_GPS_WARDRIVE) {
+            } else if(
+                state->current_view >= VIEW_GPS_CONFIG &&
+                state->current_view <= VIEW_GPS_WARDRIVE) {
                 navigate_to_view(state, VIEW_GPS);
             } else if(
                 (state->current_view >= VIEW_WIFI && state->current_view <= VIEW_GPS) ||
