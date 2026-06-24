@@ -361,9 +361,7 @@ int32_t ghost_esp_app(void* p) {
                 submenu_get_view(state->ble_scan_adv_menu));
         if(state->gps_config_menu)
             view_dispatcher_add_view(
-                state->view_dispatcher,
-                VIEW_GPS_CONFIG,
-                submenu_get_view(state->gps_config_menu));
+                state->view_dispatcher, VIEW_GPS_CONFIG, submenu_get_view(state->gps_config_menu));
         if(state->gps_wardrive_menu)
             view_dispatcher_add_view(
                 state->view_dispatcher,
