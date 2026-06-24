@@ -3473,45 +3473,106 @@ void show_wifi_settings_menu(AppState* state) {
 
 // WiFi Settings sub-category show functions
 void show_wifi_settings_led_menu(AppState* state) {
-    show_menu(state, wifi_settings_led_commands, COUNT_OF(wifi_settings_led_commands), "LED & RGB", state->wifi_settings_led_menu, VIEW_WIFI_SETTINGS_LED);
-    submenu_change_item_label(state->wifi_settings_led_menu, 0, rgbmode_commands[current_rgb_index].label);
+    show_menu(
+        state,
+        wifi_settings_led_commands,
+        COUNT_OF(wifi_settings_led_commands),
+        "LED & RGB",
+        state->wifi_settings_led_menu,
+        VIEW_WIFI_SETTINGS_LED);
+    submenu_change_item_label(
+        state->wifi_settings_led_menu, 0, rgbmode_commands[current_rgb_index].label);
 }
 
 void show_wifi_settings_sd_menu(AppState* state) {
-    show_menu(state, wifi_settings_sd_commands, COUNT_OF(wifi_settings_sd_commands), "SD Card", state->wifi_settings_sd_menu, VIEW_WIFI_SETTINGS_SD);
+    show_menu(
+        state,
+        wifi_settings_sd_commands,
+        COUNT_OF(wifi_settings_sd_commands),
+        "SD Card",
+        state->wifi_settings_sd_menu,
+        VIEW_WIFI_SETTINGS_SD);
 }
 
 void show_wifi_settings_mgmt_menu(AppState* state) {
-    show_menu(state, wifi_settings_mgmt_commands, COUNT_OF(wifi_settings_mgmt_commands), "Settings Mgmt", state->wifi_settings_mgmt_menu, VIEW_WIFI_SETTINGS_MGMT);
+    show_menu(
+        state,
+        wifi_settings_mgmt_commands,
+        COUNT_OF(wifi_settings_mgmt_commands),
+        "Settings Mgmt",
+        state->wifi_settings_mgmt_menu,
+        VIEW_WIFI_SETTINGS_MGMT);
 }
 
 void show_wifi_settings_device_menu(AppState* state) {
-    show_menu(state, wifi_settings_device_commands, COUNT_OF(wifi_settings_device_commands), "Device & Debug", state->wifi_settings_device_menu, VIEW_WIFI_SETTINGS_DEVICE);
+    show_menu(
+        state,
+        wifi_settings_device_commands,
+        COUNT_OF(wifi_settings_device_commands),
+        "Device & Debug",
+        state->wifi_settings_device_menu,
+        VIEW_WIFI_SETTINGS_DEVICE);
 }
 
 void show_wifi_settings_misc_menu(AppState* state) {
-    show_menu(state, wifi_settings_misc_commands, COUNT_OF(wifi_settings_misc_commands), "Misc", state->wifi_settings_misc_menu, VIEW_WIFI_SETTINGS_MISC);
+    show_menu(
+        state,
+        wifi_settings_misc_commands,
+        COUNT_OF(wifi_settings_misc_commands),
+        "Misc",
+        state->wifi_settings_misc_menu,
+        VIEW_WIFI_SETTINGS_MISC);
 }
 
 // WiFi Network sub-category show functions
 void show_wifi_network_portal_menu(AppState* state) {
-    show_menu(state, wifi_network_portal_commands, COUNT_OF(wifi_network_portal_commands), "Evil Portal", state->wifi_network_portal_menu, VIEW_WIFI_NETWORK_PORTAL);
+    show_menu(
+        state,
+        wifi_network_portal_commands,
+        COUNT_OF(wifi_network_portal_commands),
+        "Evil Portal",
+        state->wifi_network_portal_menu,
+        VIEW_WIFI_NETWORK_PORTAL);
 }
 
 void show_wifi_network_conn_menu(AppState* state) {
-    show_menu(state, wifi_network_conn_commands, COUNT_OF(wifi_network_conn_commands), "WiFi Connection", state->wifi_network_conn_menu, VIEW_WIFI_NETWORK_CONN);
+    show_menu(
+        state,
+        wifi_network_conn_commands,
+        COUNT_OF(wifi_network_conn_commands),
+        "WiFi Connection",
+        state->wifi_network_conn_menu,
+        VIEW_WIFI_NETWORK_CONN);
 }
 
 void show_wifi_network_scan_menu(AppState* state) {
-    show_menu(state, wifi_network_scan_commands, COUNT_OF(wifi_network_scan_commands), "Network Scan", state->wifi_network_scan_menu, VIEW_WIFI_NETWORK_SCAN);
+    show_menu(
+        state,
+        wifi_network_scan_commands,
+        COUNT_OF(wifi_network_scan_commands),
+        "Network Scan",
+        state->wifi_network_scan_menu,
+        VIEW_WIFI_NETWORK_SCAN);
 }
 
 void show_wifi_network_iot_menu(AppState* state) {
-    show_menu(state, wifi_network_iot_commands, COUNT_OF(wifi_network_iot_commands), "IoT Control", state->wifi_network_iot_menu, VIEW_WIFI_NETWORK_IOT);
+    show_menu(
+        state,
+        wifi_network_iot_commands,
+        COUNT_OF(wifi_network_iot_commands),
+        "IoT Control",
+        state->wifi_network_iot_menu,
+        VIEW_WIFI_NETWORK_IOT);
 }
 
 void show_wifi_network_webui_menu(AppState* state) {
-    show_menu(state, wifi_network_webui_commands, COUNT_OF(wifi_network_webui_commands), "WebUI", state->wifi_network_webui_menu, VIEW_WIFI_NETWORK_WEBUI);
+    show_menu(
+        state,
+        wifi_network_webui_commands,
+        COUNT_OF(wifi_network_webui_commands),
+        "WebUI",
+        state->wifi_network_webui_menu,
+        VIEW_WIFI_NETWORK_WEBUI);
 }
 
 void show_status_idle_menu(AppState* state) {
@@ -3538,19 +3599,43 @@ void show_ble_scanning_menu(AppState* state) {
 
 // BLE Scanning sub-category show functions
 void show_ble_scan_detect_menu(AppState* state) {
-    show_menu(state, ble_scan_detect_commands, COUNT_OF(ble_scan_detect_commands), "Flipper & Skimmer", state->ble_scan_detect_menu, VIEW_BLE_SCAN_DETECT);
+    show_menu(
+        state,
+        ble_scan_detect_commands,
+        COUNT_OF(ble_scan_detect_commands),
+        "Flipper & Skimmer",
+        state->ble_scan_detect_menu,
+        VIEW_BLE_SCAN_DETECT);
 }
 
 void show_ble_scan_airtag_menu(AppState* state) {
-    show_menu(state, ble_scan_airtag_commands, COUNT_OF(ble_scan_airtag_commands), "AirTag", state->ble_scan_airtag_menu, VIEW_BLE_SCAN_AIRTAG);
+    show_menu(
+        state,
+        ble_scan_airtag_commands,
+        COUNT_OF(ble_scan_airtag_commands),
+        "AirTag",
+        state->ble_scan_airtag_menu,
+        VIEW_BLE_SCAN_AIRTAG);
 }
 
 void show_ble_scan_gatt_menu(AppState* state) {
-    show_menu(state, ble_scan_gatt_commands, COUNT_OF(ble_scan_gatt_commands), "GATT", state->ble_scan_gatt_menu, VIEW_BLE_SCAN_GATT);
+    show_menu(
+        state,
+        ble_scan_gatt_commands,
+        COUNT_OF(ble_scan_gatt_commands),
+        "GATT",
+        state->ble_scan_gatt_menu,
+        VIEW_BLE_SCAN_GATT);
 }
 
 void show_ble_scan_adv_menu(AppState* state) {
-    show_menu(state, ble_scan_adv_commands, COUNT_OF(ble_scan_adv_commands), "Advertisers & Traffic", state->ble_scan_adv_menu, VIEW_BLE_SCAN_ADV);
+    show_menu(
+        state,
+        ble_scan_adv_commands,
+        COUNT_OF(ble_scan_adv_commands),
+        "Advertisers & Traffic",
+        state->ble_scan_adv_menu,
+        VIEW_BLE_SCAN_ADV);
 }
 
 void show_ble_capture_menu(AppState* state) {
@@ -3630,11 +3715,23 @@ void show_gps_menu(AppState* state) {
 
 // GPS sub-category show functions
 void show_gps_config_menu(AppState* state) {
-    show_menu(state, gps_config_commands, COUNT_OF(gps_config_commands), "GPS Config", state->gps_config_menu, VIEW_GPS_CONFIG);
+    show_menu(
+        state,
+        gps_config_commands,
+        COUNT_OF(gps_config_commands),
+        "GPS Config",
+        state->gps_config_menu,
+        VIEW_GPS_CONFIG);
 }
 
 void show_gps_wardrive_menu(AppState* state) {
-    show_menu(state, gps_wardrive_commands, COUNT_OF(gps_wardrive_commands), "Wardriving", state->gps_wardrive_menu, VIEW_GPS_WARDRIVE);
+    show_menu(
+        state,
+        gps_wardrive_commands,
+        COUNT_OF(gps_wardrive_commands),
+        "Wardriving",
+        state->gps_wardrive_menu,
+        VIEW_GPS_WARDRIVE);
 }
 
 void show_ir_menu(AppState* state) {
