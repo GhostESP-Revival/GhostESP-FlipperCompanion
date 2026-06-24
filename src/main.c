@@ -291,67 +291,83 @@ int32_t ghost_esp_app(void* p) {
         // Sub-category views
         if(state->wifi_settings_led_menu)
             view_dispatcher_add_view(
-                state->view_dispatcher, VIEW_WIFI_SETTINGS_LED,
+                state->view_dispatcher,
+                VIEW_WIFI_SETTINGS_LED,
                 submenu_get_view(state->wifi_settings_led_menu));
         if(state->wifi_settings_sd_menu)
             view_dispatcher_add_view(
-                state->view_dispatcher, VIEW_WIFI_SETTINGS_SD,
+                state->view_dispatcher,
+                VIEW_WIFI_SETTINGS_SD,
                 submenu_get_view(state->wifi_settings_sd_menu));
         if(state->wifi_settings_mgmt_menu)
             view_dispatcher_add_view(
-                state->view_dispatcher, VIEW_WIFI_SETTINGS_MGMT,
+                state->view_dispatcher,
+                VIEW_WIFI_SETTINGS_MGMT,
                 submenu_get_view(state->wifi_settings_mgmt_menu));
         if(state->wifi_settings_device_menu)
             view_dispatcher_add_view(
-                state->view_dispatcher, VIEW_WIFI_SETTINGS_DEVICE,
+                state->view_dispatcher,
+                VIEW_WIFI_SETTINGS_DEVICE,
                 submenu_get_view(state->wifi_settings_device_menu));
         if(state->wifi_settings_misc_menu)
             view_dispatcher_add_view(
-                state->view_dispatcher, VIEW_WIFI_SETTINGS_MISC,
+                state->view_dispatcher,
+                VIEW_WIFI_SETTINGS_MISC,
                 submenu_get_view(state->wifi_settings_misc_menu));
         if(state->wifi_network_portal_menu)
             view_dispatcher_add_view(
-                state->view_dispatcher, VIEW_WIFI_NETWORK_PORTAL,
+                state->view_dispatcher,
+                VIEW_WIFI_NETWORK_PORTAL,
                 submenu_get_view(state->wifi_network_portal_menu));
         if(state->wifi_network_conn_menu)
             view_dispatcher_add_view(
-                state->view_dispatcher, VIEW_WIFI_NETWORK_CONN,
+                state->view_dispatcher,
+                VIEW_WIFI_NETWORK_CONN,
                 submenu_get_view(state->wifi_network_conn_menu));
         if(state->wifi_network_scan_menu)
             view_dispatcher_add_view(
-                state->view_dispatcher, VIEW_WIFI_NETWORK_SCAN,
+                state->view_dispatcher,
+                VIEW_WIFI_NETWORK_SCAN,
                 submenu_get_view(state->wifi_network_scan_menu));
         if(state->wifi_network_iot_menu)
             view_dispatcher_add_view(
-                state->view_dispatcher, VIEW_WIFI_NETWORK_IOT,
+                state->view_dispatcher,
+                VIEW_WIFI_NETWORK_IOT,
                 submenu_get_view(state->wifi_network_iot_menu));
         if(state->wifi_network_webui_menu)
             view_dispatcher_add_view(
-                state->view_dispatcher, VIEW_WIFI_NETWORK_WEBUI,
+                state->view_dispatcher,
+                VIEW_WIFI_NETWORK_WEBUI,
                 submenu_get_view(state->wifi_network_webui_menu));
         if(state->ble_scan_detect_menu)
             view_dispatcher_add_view(
-                state->view_dispatcher, VIEW_BLE_SCAN_DETECT,
+                state->view_dispatcher,
+                VIEW_BLE_SCAN_DETECT,
                 submenu_get_view(state->ble_scan_detect_menu));
         if(state->ble_scan_airtag_menu)
             view_dispatcher_add_view(
-                state->view_dispatcher, VIEW_BLE_SCAN_AIRTAG,
+                state->view_dispatcher,
+                VIEW_BLE_SCAN_AIRTAG,
                 submenu_get_view(state->ble_scan_airtag_menu));
         if(state->ble_scan_gatt_menu)
             view_dispatcher_add_view(
-                state->view_dispatcher, VIEW_BLE_SCAN_GATT,
+                state->view_dispatcher,
+                VIEW_BLE_SCAN_GATT,
                 submenu_get_view(state->ble_scan_gatt_menu));
         if(state->ble_scan_adv_menu)
             view_dispatcher_add_view(
-                state->view_dispatcher, VIEW_BLE_SCAN_ADV,
+                state->view_dispatcher,
+                VIEW_BLE_SCAN_ADV,
                 submenu_get_view(state->ble_scan_adv_menu));
         if(state->gps_config_menu)
             view_dispatcher_add_view(
-                state->view_dispatcher, VIEW_GPS_CONFIG,
+                state->view_dispatcher,
+                VIEW_GPS_CONFIG,
                 submenu_get_view(state->gps_config_menu));
         if(state->gps_wardrive_menu)
             view_dispatcher_add_view(
-                state->view_dispatcher, VIEW_GPS_WARDRIVE,
+                state->view_dispatcher,
+                VIEW_GPS_WARDRIVE,
                 submenu_get_view(state->gps_wardrive_menu));
 
         view_dispatcher_set_custom_event_callback(
