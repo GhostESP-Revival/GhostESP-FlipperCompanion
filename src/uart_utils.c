@@ -11,8 +11,7 @@ uint32_t g_uart_rx_session_bytes = 0;
 bool g_uart_rx_session_started = false;
 uint32_t g_uart_callback_count = 0;
 
-#define WORKER_ALL_RX_EVENTS \
-    (WorkerEvtStop | WorkerEvtRxDone)
+#define WORKER_ALL_RX_EVENTS   (WorkerEvtStop | WorkerEvtRxDone)
 #define PCAP_WRITE_CHUNK_SIZE  1024
 #define AP_LIST_TIMEOUT_MS     5000
 #define INITIAL_BUFFER_SIZE    2048
@@ -204,7 +203,8 @@ static void text_buffer_restore_view_terminator(TextBufferManager* manager, char
 }
 // The interrupt owns only the input queue. Parsing, files and UI belong to
 // the worker, so no capture-start allocation or IRQ-side mutex is needed.
-static void uart_rx_callback(FuriHalSerialHandle* handle, FuriHalSerialRxEvent event, void* context) {
+static void
+    uart_rx_callback(FuriHalSerialHandle* handle, FuriHalSerialRxEvent event, void* context) {
     UartContext* uart = context;
     if(!uart || event != FuriHalSerialRxEventData) return;
     uint8_t data = furi_hal_serial_async_rx(handle);
@@ -212,7 +212,8 @@ static void uart_rx_callback(FuriHalSerialHandle* handle, FuriHalSerialRxEvent e
     ++g_uart_rx_session_bytes;
     uart->rx_last_tick = furi_get_tick();
     if(furi_stream_buffer_send(uart->rx_stream, &data, 1, 0) != 1) ++uart->rx_dropped_bytes;
-    if(uart->rx_thread) furi_thread_flags_set(furi_thread_get_id(uart->rx_thread), WorkerEvtRxDone);
+    if(uart->rx_thread)
+        furi_thread_flags_set(furi_thread_get_id(uart->rx_thread), WorkerEvtRxDone);
 }
 
 void handle_uart_rx_data(uint8_t* buf, size_t len, void* context) {
@@ -273,7 +274,8 @@ static void uart_flush_output(UartContext* uart) {
     } else if(uart->write_type == UartFrameCsv) {
         if(uart->handle_rx_csv_cb) uart->handle_rx_csv_cb(uart->write_buf, uart->write_len, uart);
     } else {
-        if(uart->handle_rx_pcap_cb) uart->handle_rx_pcap_cb(uart->write_buf, uart->write_len, uart);
+        if(uart->handle_rx_pcap_cb)
+            uart->handle_rx_pcap_cb(uart->write_buf, uart->write_len, uart);
     }
     uart->write_len = 0;
 }
@@ -319,7 +321,8 @@ static int32_t uart_worker(void* context) {
     if(!uart) return -1;
     uint32_t reported_drops = 0;
     for(;;) {
-        uint32_t events = furi_thread_flags_wait(WORKER_ALL_RX_EVENTS, FuriFlagWaitAny, FuriWaitForever);
+        uint32_t events =
+            furi_thread_flags_wait(WORKER_ALL_RX_EVENTS, FuriFlagWaitAny, FuriWaitForever);
         furi_mutex_acquire(uart->worker_mutex, FuriWaitForever);
         uart_drain_input(uart);
         if(events & WorkerEvtStop) {
@@ -599,7 +602,8 @@ void uart_wait_capture_idle(UartContext* uart) {
         furi_mutex_release(uart->worker_mutex);
         uint32_t now = furi_get_tick();
         if(now - started >= furi_ms_to_ticks(350) && idle &&
-           now - uart->rx_last_tick >= furi_ms_to_ticks(150)) return;
+           now - uart->rx_last_tick >= furi_ms_to_ticks(150))
+            return;
         furi_delay_ms(10);
     }
     FURI_LOG_W("UART", "Timed out waiting for capture stream to finish");

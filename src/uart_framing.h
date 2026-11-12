@@ -21,9 +21,14 @@ typedef struct {
 } UartFraming;
 
 // A zero-length output marks a frame close; data has already been emitted.
-typedef void (*UartFramingOutput)(UartFrameType type, const uint8_t* data, size_t len, void* context);
+typedef void (
+    *UartFramingOutput)(UartFrameType type, const uint8_t* data, size_t len, void* context);
 
 void uart_framing_reset(UartFraming* parser, UartFrameType capture_type);
-void uart_framing_feed(UartFraming* parser, const uint8_t* data, size_t len,
-                       UartFramingOutput output, void* context);
+void uart_framing_feed(
+    UartFraming* parser,
+    const uint8_t* data,
+    size_t len,
+    UartFramingOutput output,
+    void* context);
 void uart_framing_finish(UartFraming* parser, UartFramingOutput output, void* context);
