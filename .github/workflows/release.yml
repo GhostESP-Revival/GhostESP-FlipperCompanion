@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: "Release version (e.g. 1.9.0; a leading v is optional)"
+        description: "Release version (e.g. 1.9.1; a leading v is optional)"
         required: true
         type: string
       release_name:
@@ -73,6 +73,9 @@ jobs:
 
           with open(path, "w", encoding="utf-8") as f:
               f.write(manifest)
+
+          with open("src/app_version.h", "w", encoding="utf-8") as f:
+              f.write(f'#pragma once\n\n#define GHOSTESP_APP_VERSION "{version}"\n')
 
           print(f"fap_version set to {version}")
           PY
